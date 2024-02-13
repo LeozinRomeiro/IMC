@@ -1,0 +1,60 @@
+﻿@using Imc.ViewModels
+@using Imc.Models.Enums
+@using Imc.Models
+@using Imc.Repositories
+
+@inject NavigationManager navi;
+@inject ILocalStorageService LocalStorage
+
+@inherits LayoutComponentBase
+
+<main class="todo">
+    <div class="caixa">
+        <div>
+            <h1>Cálculo de IMC</h1>
+        </div>
+        <EditForm Model="person" OnValidSubmit="Calculation">
+            <DataAnnotationsValidator></DataAnnotationsValidator>
+            <ValidationSummary></ValidationSummary>
+            <div class="flex flex-column">
+                <div><InputNumber class="input-text" id="Altura" typeof="number" placeholder="Altura" @bind-Value="person.Height" /></div>
+                <div><InputNumber class="input-text" id="Peso" typeof="number" @bind-Value="person.Weight" placeholder="Peso" /></div>
+                <div>
+                    <select class="input-text" @bind="person.Sex">
+                        <option value=@null>Selecione o Sexo</option>
+                        <option value=@ESex.Male>Masculino</option>
+                        <option value=@ESex.female>Feminino</option>
+                    </select>
+                </div>
+
+            </div>
+            <div class="checkbox-container">
+                <input class="checkbox" type="checkbox" id="age" @bind-value="person.IsElderly" />
+                <label class="checkbox-label" for="age">Eu tenho 65 anos ou mais</label><br>    
+            </div>
+            <div>
+                <button class="button-primary" type="submit">Calcular meu IMC</button>
+            </div>
+        </EditForm>
+        <div>
+            <button class="button-secondary white-background">Entender o Cálculo</button>
+        </div>
+     </div>
+</main>
+
+
+@code {
+    [Parameter] public EventCallback<bool> IsBusy { get; set; } 
+
+    PersonViewModel person = new PersonViewModel();
+
+    private async Task Calculation()
+    {
+        var _person = new Person(person.Height, person.Weight, person.Sex, person.IsElderly);
+        var imcResultRepository = new LocalStorageRepository(LocalStorage);
+        imcResultRepository.Create(_person);
+        var history = imcResultRepository.Get();
+        navi.NavigateTo("./historic");
+    }
+    //public EventCallback<PersonData> Calculation { get; set; }
+}

@@ -1,0 +1,23 @@
+﻿@page "/"
+
+<PageTitle>Bem vindo ao calculador de IMC</PageTitle>
+@if (!ShowHistoric)
+{
+
+	<CalculationIMC IsBusy="HandleIsBusyCalculation" />
+}
+else
+{
+	<label>TEste</label>
+}
+
+
+
+@code{
+	private bool ShowHistoric = false;
+	private void HandleIsBusyCalculation(bool IsBusy) 
+	{
+		ShowHistoric = IsBusy;
+		StateHasChanged();
+	}
+}
