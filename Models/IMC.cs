@@ -18,7 +18,8 @@ namespace Imc.Models
 
         private void Calculate(Person person)
         {
-            Value = person.Weight / (person.Height * person.Height);
+            var _value = person.Weight / (person.Height * person.Height);
+            Value = (double)_value;
         }
         private void Check(bool isElderly)
         {

@@ -17,11 +17,11 @@
             <DataAnnotationsValidator></DataAnnotationsValidator>
             <ValidationSummary></ValidationSummary>
             <div class="flex flex-column">
-                <div><InputNumber class="input-text" id="Altura" typeof="number" placeholder="Altura" @bind-Value="person.Height" /></div>
-                <div><InputNumber class="input-text" id="Peso" typeof="number" @bind-Value="person.Weight" placeholder="Peso" /></div>
+                <div><InputNumber class="input-text" id="Altura" placeholder="Altura" @bind-Value="person.Height" /></div>
+                <div><InputNumber class="input-text" id="Peso" @bind-Value="person.Weight" placeholder="Peso" /></div>
                 <div>
                     <select class="input-text" @bind="person.Sex">
-                        <option value=@null>Selecione o Sexo</option>
+                        <option>Selecione o Sexo</option>
                         <option value=@ESex.Male>Masculino</option>
                         <option value=@ESex.female>Feminino</option>
                     </select>
@@ -44,13 +44,11 @@
 
 
 @code {
-    [Parameter] public EventCallback<bool> IsBusy { get; set; } 
-
     PersonViewModel person = new PersonViewModel();
 
     private async Task Calculation()
     {
-        var _person = new Person(person.Height, person.Weight, person.Sex, person.IsElderly);
+        var _person = new Person { Height = person.Height, Weight = person.Weight, Sex = person.Sex, IsElderly = person.IsElderly };
         var imcResultRepository = new LocalStorageRepository(LocalStorage);
         imcResultRepository.Create(_person);
         var history = imcResultRepository.Get();

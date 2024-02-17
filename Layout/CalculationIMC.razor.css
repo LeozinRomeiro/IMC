@@ -11,6 +11,7 @@
 
 .todo {
     margin-top: 20px;
+
 }
 
 titulo {
@@ -24,8 +25,10 @@ titulo {
     padding: 20px;
     width: 300px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    margin-top: 69px;
-    align-items: center;
+    position: absolute;
+    top: 400px;
+    left: 50%;
+    transform: translate(-50%, -50%);
     text-align: center;
 }
 

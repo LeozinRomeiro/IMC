@@ -1,23 +1,20 @@
 ﻿@page "/"
 
-<PageTitle>Bem vindo ao calculador de IMC</PageTitle>
-@if (!ShowHistoric)
-{
+<PageTitle>Calculador de IMC</PageTitle>
 
-	<CalculationIMC IsBusy="HandleIsBusyCalculation" />
-}
-else
-{
-	<label>TEste</label>
-}
+<div class="container">
+	
+	<Slide Id="slide-calcule">
 
+	</Slide>
 
+	<Slide Id="slide-list">
 
-@code{
-	private bool ShowHistoric = false;
-	private void HandleIsBusyCalculation(bool IsBusy) 
-	{
-		ShowHistoric = IsBusy;
-		StateHasChanged();
-	}
-}
+	</Slide>
+
+	<Slide Id="slide-about">
+
+	</Slide>
+
+</div>
+

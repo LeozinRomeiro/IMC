@@ -60,7 +60,7 @@ h5 {
 
 /*Padrao*/
 
-.page {
+/*.page {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -96,7 +96,7 @@ main {
     .top-row ::deep a:first-child {
         overflow: hidden;
         text-overflow: ellipsis;
-    }
+    }*/
 
 @media (max-width: 640.98px) {
     .top-row {

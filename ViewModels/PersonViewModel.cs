@@ -4,9 +4,9 @@ namespace Imc.ViewModels
 {
     public class PersonViewModel
     {
-        public float Height { get; set; }
-        public float Weight { get; set; }
-        public ESex Sex { get; set; }
+        public decimal? Height { get; set; }
+        public decimal? Weight { get; set; }
+        public ESex? Sex { get; set; }
         public bool IsElderly { get; set; }
 
     }
