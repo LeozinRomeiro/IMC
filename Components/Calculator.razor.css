@@ -9,27 +9,9 @@
     /* Usando min-height para garantir que o corpo tenha pelo menos a altura da tela */
 }
 
-.todo {
-    margin-top: 20px;
-
-}
-
 titulo {
     margin-bottom: 2px;
     /* Adicione ou ajuste o valor da margem conforme necessário */
-}
-
-.caixa {
-    background-color: white;
-    border-radius: 8px;
-    padding: 20px;
-    width: 300px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    position: absolute;
-    top: 400px;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
 }
 
 .logo-container {
