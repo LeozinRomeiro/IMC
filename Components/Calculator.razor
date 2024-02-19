@@ -44,11 +44,11 @@
 
 
 @code {
-    PersonViewModel person = new PersonViewModel();
+    private _ImcModel _model = new();
 
     private async Task Calculation()
     {
-        var _person = new Person { Height = person.Height, Weight = person.Weight, Sex = person.Sex, IsElderly = person.IsElderly };
+        var _person = new PersonModel { Height = person.Height, Weight = person.Weight, Sex = person.Sex, IsElderly = person.IsElderly };
         var imcResultRepository = new LocalStorageRepository(LocalStorage);
         imcResultRepository.Create(_person);
         var history = imcResultRepository.Get();

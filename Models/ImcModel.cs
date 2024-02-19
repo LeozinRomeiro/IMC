@@ -3,9 +3,9 @@ using System.Net.NetworkInformation;
 
 namespace Imc.Models
 {
-    public class IMC
+    public class ImcModel
     {
-        public IMC(Person person)
+        public ImcModel(PersonModel person)
         {
             Registered = DateTime.Now;
 
@@ -16,7 +16,7 @@ namespace Imc.Models
         public double Value { get; private set; }
         public EStatus Status { get; private set; }
 
-        private void Calculate(Person person)
+        private void Calculate(PersonModel person)
         {
             var _value = person.Weight / (person.Height * person.Height);
             Value = (double)_value;

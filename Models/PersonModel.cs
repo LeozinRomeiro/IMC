@@ -2,7 +2,7 @@
 
 namespace Imc.Models
 {
-    public class Person
+    public class PersonModel
     {
 /*        public Person(float height, float weight, ESex sex, bool isElderly)
         {

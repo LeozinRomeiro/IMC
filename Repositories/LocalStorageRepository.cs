@@ -24,10 +24,10 @@ namespace Imc.Repositories
             return result;
         }
 
-        public void Create(Person person)
+        public void Create(PersonModel person)
         {
             var key = (_localStorage.Length + 1).ToString();
-            var imc = new IMC(person);
+            var imc = new ImcModel(person);
             var _imc = new IMCViewModel
             {
                 Registered = imc.Registered,
