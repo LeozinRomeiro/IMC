@@ -1,0 +1,13 @@
+﻿<button onclick="showModal()">Abrir Modal</button>
+<dialog id="result-dialog">
+    <div class="dialog-content">
+        @ChildContent
+        <br />
+    </div>
+</dialog>
+
+@code {
+    [EditorRequired]
+    [Parameter]
+    public RenderFragment ChildContent { get; set; } = null!;
+}
