@@ -22,6 +22,8 @@ namespace Imc.ViewModels
             }
         }
         public double? Value { get; set; }
+        public double? Height { get; set; }
+        public double? Weight { get; set; }
         public EStatus Status { get; set; }
 
         public string Title {
@@ -29,8 +31,10 @@ namespace Imc.ViewModels
             {
                 if (Status == EStatus.Sobrepeso || Status == EStatus.Obesidade || Status == EStatus.Obesidade_Grave)
                     return "Sobrepeso ⛔️";
-                if (Status == EStatus.Magro || Status == EStatus.Normal)
+                if (Status == EStatus.Normal)
                     return "Peso ideal ✅";
+                if (Status == EStatus.Magro)
+                    return "Abaixo ⚠️";
                 else return "";
             }
         }

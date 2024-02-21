@@ -27,7 +27,7 @@ namespace Imc.Repositories
         public void Create(PersonModel person)
         {
             var key = (_localStorage.Length + 1).ToString();
-            var imc = new ImcModel(person);
+            var imc = new _ImcModel(person);
             var _imc = new IMCViewModel
             {
                 Registered = imc.Registered,

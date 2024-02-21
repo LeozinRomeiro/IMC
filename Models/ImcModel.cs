@@ -1,50 +1,36 @@
 ﻿using Imc.Models.Enums;
-using System.Net.NetworkInformation;
+using System.ComponentModel.DataAnnotations;
 
 namespace Imc.Models
 {
     public class ImcModel
     {
-        public ImcModel(PersonModel person)
-        {
-            Registered = DateTime.Now;
+        [Required(ErrorMessage = "Informe a altura")]
+        [Range(1, 3, ErrorMessage = "Altura inválida")]
+        public double? Height { get; set; }
 
-            Calculate(person);
-            Check(person.IsElderly);
-        }
-        public DateTime Registered { get; private set; }
-        public double Value { get; private set; }
-        public EStatus Status { get; private set; }
+        [Required(ErrorMessage = "Informe o peso")]
+        [Range(15, 180, ErrorMessage = "Peso inválido")]
+        public double? Weight { get; set; }
 
-        private void Calculate(PersonModel person)
-        {
-            var _value = person.Weight / (person.Height * person.Height);
-            Value = (double)_value;
-        }
-        private void Check(bool isElderly)
-        {
-            if(isElderly)
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+
+        public double Imc => (Weight ?? 1) / ((Height ?? 1) * (Height ?? 1));
+        public EStatus Status 
+        { 
+            get 
             {
-                if (Value <= 18.5)
-                    Status = EStatus.Magro;
-                if (Value <= 24.9)
-                    Status = EStatus.Normal;
-                if (Value <= 29)
-                    Status = EStatus.Obesidade;
-                if (Value <= 39.9)
-                    Status = EStatus.Obesidade_Grave;
+                if (Imc <= 18.5)
+                    return EStatus.Magro;
+                if (Imc <= 24.9)
+                    return EStatus.Normal;
+                if (Imc <= 29)
+                    return EStatus.Obesidade;
+                if (Imc <= 39.9)
+                    return EStatus.Obesidade_Grave;
                 else
-                    Status = EStatus.Sobrepeso;
-            }
-            else
-            {
-                if (Value <= 18.5)
-                    Status = EStatus.Magro;
-                if (Value < 25)
-                    Status = EStatus.Normal;
-                else
-                    Status = EStatus.Sobrepeso;
-            }
+                    return EStatus.Sobrepeso;
+            } 
         }
     }
 }

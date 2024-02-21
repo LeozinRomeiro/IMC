@@ -1,13 +1,48 @@
-﻿<button onclick="showModal()">Abrir Modal</button>
+﻿@inherits LayoutComponentBase
+
+@inject NavigationManager NavigationManager;
+@inject IJSRuntime JsRuntime;
+
 <dialog id="result-dialog">
-    <div class="dialog-content">
+    <div class="dialog-content" id="@Id">
         @ChildContent
         <br />
+        <button @onclick="HideModalAsync">
+            Registrar IMC
+        </button> 
     </div>
 </dialog>
 
 @code {
+    [Parameter]
+    [EditorRequired]
+    public string Id { get; set; } = string.Empty;
     [EditorRequired]
     [Parameter]
     public RenderFragment ChildContent { get; set; } = null!;
+    [Parameter]
+    public EventCallback<MouseEventArgs> OnModalCloseCallback { get; set; }
+    private IJSObjectReference? module;
+
+    public async Task ShowModalAsync()
+    {
+        await JSHost.ImportAsync("Dialog",
+                         "../Components/Dialog.razor.js");
+        await JsRuntime.InvokeVoidAsync("showModal", "result-dialog");
+
+        StateHasChanged();
+    }
+
+    public async Task HideModalAsync()
+    {
+        await JSHost.ImportAsync("Dialog",
+                         "../Components/Dialog.razor.js");
+        await JsRuntime.InvokeVoidAsync("hideModal", "result-dialog");
+
+        NavigationManager.NavigateTo("#historic");
+
+        StateHasChanged();
+
+        await OnModalCloseCallback.InvokeAsync();
+    }
 }

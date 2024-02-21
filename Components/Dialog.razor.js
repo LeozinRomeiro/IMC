@@ -1,9 +1,9 @@
-﻿window.showModal() {
-    let el document.getElementById('result-dialog');
-    el.showModal;
-}
+﻿window.showModal = (id) => {
+    let el = document.getElementById(id);
+    el.showModal();
+};
 
-window.hideModal() {
-    let el document.getElementById('result-dialog');
-    el.close;
-}
+window.hideModal = (id) => {
+    let el = document.getElementById(id);
+    el.close();
+};

@@ -1,0 +1,71 @@
+﻿@inherits LayoutComponentBase
+
+@inject Blazored.LocalStorage.ILocalStorageService LocalStorage;
+
+@if (AppState.History.Count == 0)
+{
+    <p>
+        <em>Nenhum resultado encontrado...</em>
+    </p>
+}
+else
+{
+    <ul class="list-unstyled">
+        @foreach (var item in models)
+        {
+            <li>
+                <div class="list-item">
+                    <div class="list-item-image">
+                        <h1 class="warning">@item.Value.ToString()</h1>
+                    </div>
+                    <div class="list-item-description">
+                        <div class="list-item-description-title">
+                            <h4>@item.Title</h4>
+                            <small>@item.FormattedRegistered</small>
+                        </div>
+                        <div class="list-item-description-text">
+                            <span>
+                                @item.Height metros de altura e @item.Weight kilos de peso.
+                            </span>
+                        </div >
+                    </div >
+                </div >
+            </li>
+        }
+    </ul>
+}
+
+@code {
+
+    private List<IMCViewModel> models = new List<IMCViewModel>();
+
+    protected async Task OnInitializedAsync()
+    {
+        AppState.OnChanged += OnAppStateChanged;
+        var data = await LocalStorage.GetItemAsync<List<ImcModel>?>("data");
+        if (data is not null)
+            AppState.History = data;
+        foreach (var imc in AppState.History)
+        {
+            var imcViewModel = new IMCViewModel
+                {
+                    Registered = imc.CreatedAt,
+                    Value = imc.Imc,
+                    Status = imc.Status,
+                    Weight = imc.Weight,
+                    Height = imc.Height
+                };
+
+            models.Add(imcViewModel);
+        }
+    }
+    void Dispose()
+    {
+        AppState.OnChanged -= OnAppStateChanged;
+    }
+
+    private void OnAppStateChanged(object? o, EventArgs e)
+    {
+        InvokeAsync(StateHasChanged);
+    }
+}

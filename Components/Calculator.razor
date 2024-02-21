@@ -2,9 +2,9 @@
 @using Imc.Models.Enums
 @using Imc.Models
 @using Imc.Repositories
+@using Imc.Components
 
-@inject NavigationManager navi;
-@inject ILocalStorageService LocalStorage
+@inject Blazored.LocalStorage.ILocalStorageService LocalStorage;
 
 @inherits LayoutComponentBase
 
@@ -12,54 +12,82 @@
 <div>
     <h1>Cálculo de IMC</h1>
 </div>
-<EditForm Model="_model" OnValidSubmit="OnValidSubmit">
+<EditForm Model="@_model" OnValidSubmit="@OnValidSubmitAsync">
     <DataAnnotationsValidator></DataAnnotationsValidator>
     <ValidationSummary></ValidationSummary>
-    <div class="flex flex-column">
-        <div class="mb" >
-            <InputNumber class="input-text" id="Altura" placeholder="Altura" step="0.01" @bind-Value="_model.Height" />
+    <div class="mb" >
+        <InputNumber class="form-input" id="Altura" placeholder="Altura" step="0.01" @bind-Value="_model.Height" />
 @*             <span class="form-input-invalid">
-                <ValidationMessage For="@(() => _mode.Height)"/>
-            </span>  *@   
-        </div>
-        <div class ="mb">
-            <InputNumber class="input-text" id="Peso" @bind-Value="person.Weight" placeholder="Peso" />
-        </div>
-        <div>
-            <select class="input-text" @bind="person.Sex">
-                <option>Selecione o Sexo</option>
-                <option value=@ESex.Male>Masculino</option>
-                <option value=@ESex.female>Feminino</option>
-            </select>
-        </div>
+            <ValidationMessage For="@(() => _mode.Height)"/>
+        </span>  *@   
+    </div>
+    <div class ="mb">
+        <InputNumber class="form-input" id="Peso" @bind-Value="_model.Weight" placeholder="Peso" />
+    </div>
+@*         <div>
+        <select class="input-text" @bind="_model.Sex">
+            <option>Selecione o Sexo</option>
+            <option value=@ESex.Male>Masculino</option>
+            <option value=@ESex.female>Feminino</option>
+        </select>
+    </div> *@
 
-    </div>
-    <div class="checkbox-container">
-        <input class="checkbox" type="checkbox" id="age" @bind-value="person.IsElderly" />
+@*     <div class="checkbox-container">
+        <input class="checkbox" type="checkbox" id="age" @bind-value="_model.IsElderly" />
         <label class="checkbox-label" for="age">Eu tenho 65 anos ou mais</label><br>    
-    </div>
-    <div>
-        <button class="button-primary" type="submit">Calcular meu IMC</button>
+    </div> *@
+    <div class="flex flex-center">
+        <button class="btn btn-filled btn-auto mb" type="submit">Calcular meu IMC</button>
+        <a class="btn btn-link" href="#about">
+            Entenda o cálculo
+        </a>
     </div>
 </EditForm>
-<div>
-    <button class="button-secondary white-background">Entender o Cálculo</button>
-</div>
+
+<Dialog Id="modal" @ref="_dialog" OnModalCloseCallback="@CloseModalAsync">
+    @if (_model.Imc < 18.6)
+    {
+        <h1>Abaixo do peso ⚠️</h1>
+        <p>Você está abaixo do peso indicado, siga as recomendações do seu nutricionista para chegar lá.</p>
+    }
+    else if (_model.Imc >= 18.6 && _model.Imc <= 24.9)
+    {
+        <h1>Peso ideal ✅</h1>
+        <p>Parabéns! Você está na faixa de peso ideal, continue assim.</p>
+    }
+    else if (_model.Imc >= 24.9)
+    {
+        <h1>Sobrepeso 🔴</h1>
+        <p>Você está acima do peso indicado, siga as recomendações do seu nutricionista para chegar lá.</p>
+    }
+</Dialog>
 
 
 
 @code {
-    private _ImcModel _model = new();
+    private ImcModel _model = new();
+    private Dialog _dialog = null!;
 
-    private async Task OnValidSubmit()
+    private async Task OnValidSubmitAsync()
     {
-        var _person = new PersonModel { Height = person.Height, Weight = person.Weight, Sex = person.Sex, IsElderly = person.IsElderly };
-        var imcResultRepository = new LocalStorageRepository(LocalStorage);
-        imcResultRepository.Create(_person);
-        var history = imcResultRepository.Get();
-        navi.NavigateTo("./historic");
+        await ShowModalAsync();
+        //var _person = new PersonModel { Height = _model.Height, Weight = _model.Weight, Sex = _model.Sex, IsElderly = person.IsElderly };
+        //var imcResultRepository = new LocalStorageRepository(LocalStorage);
+        //imcResultRepository.Create(_person);
+        //var history = imcResultRepository.Get();
     }
-    
+
+    private async Task ShowModalAsync() => _dialog.ShowModalAsync();
+
+
+    private async Task CloseModalAsync()
+    {
+        AppState.History.Add(_model);
+        await LocalStorage.SetItemAsync("data", AppState.History);
+        AppState.NotifyChanges(_model, null);
+
+        _model = new();
+    }
 
     //public EventCallback<PersonData> Calculation { get; set; }
 }
