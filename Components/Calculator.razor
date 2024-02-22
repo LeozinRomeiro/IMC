@@ -72,7 +72,7 @@
         //var history = imcResultRepository.Get();
     }
 
-    private async Task ShowModalAsync() => _dialog.ShowModalAsync();
+    private async Task ShowModalAsync() => await _dialog.ShowModalAsync();
 
 
     private async Task CloseModalAsync()

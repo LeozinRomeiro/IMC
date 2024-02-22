@@ -39,7 +39,7 @@ else
 
     private List<IMCViewModel> models = new List<IMCViewModel>();
 
-    protected async Task OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
     {
         AppState.OnChanged += OnAppStateChanged;
         var data = await LocalStorage.GetItemAsync<List<ImcModel>?>("data");
