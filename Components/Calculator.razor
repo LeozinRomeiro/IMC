@@ -78,7 +78,7 @@
         //var history = imcResultRepository.Get();
     }
 
-    private async Task OnInvalidSubmitAsync()
+    private void OnInvalidSubmitAsync()
     {
         _message = "Dados invalidos";
     }
@@ -89,8 +89,9 @@
     private async Task CloseModalAsync()
     {
         AppState.History.Add(_model);
+        AppState.UpdateView();
         await LocalStorage.SetItemAsync("data", AppState.History);
-        AppState.NotifyChanges(_model, null);
+        await AppState.NotifyChanges(_model, null);
 
         _model = new();
     }

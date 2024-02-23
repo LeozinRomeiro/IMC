@@ -33,18 +33,18 @@ body {
     scroll-behavior: smooth;
 }
 
-    .container::-webkit-scrollbar {
-        width: 0.7em;
-    }
+.container::-webkit-scrollbar {
+    width: 0.7em;
+}
 
-    .container::-webkit-scrollbar-track {
-        background: rgba(0, 0, 0, 0.02);
-    }
+.container::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.02);
+}
 
-    .container::-webkit-scrollbar-thumb {
-        background-color: #333;
-        border-radius: 0.7em;
-    }
+.container::-webkit-scrollbar-thumb {
+    background-color: #333;
+    border-radius: 0.7em;
+}
 
 .mb {
     margin-bottom: 16px;

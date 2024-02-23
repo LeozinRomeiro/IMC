@@ -22,7 +22,6 @@
     public RenderFragment ChildContent { get; set; } = null!;
     [Parameter]
     public EventCallback<MouseEventArgs> OnModalCloseCallback { get; set; }
-    private IJSObjectReference? module;
 
     public async Task ShowModalAsync()
     {
@@ -39,9 +38,9 @@
                          "../Components/Dialog.razor.js");
         await JsRuntime.InvokeVoidAsync("hideModal", "result-dialog");
 
-        NavigationManager.NavigateTo("#historic");
-
         StateHasChanged();
+
+        NavigationManager.NavigateTo("#slide-history");
 
         await OnModalCloseCallback.InvokeAsync();
     }
