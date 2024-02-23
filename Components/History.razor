@@ -50,7 +50,7 @@ else
             var imcViewModel = new IMCViewModel
                 {
                     Registered = imc.CreatedAt,
-                    Value = imc.Imc,
+                    Value = Math.Round((decimal)imc.Imc, 1),
                     Status = imc.Status,
                     Weight = imc.Weight,
                     Height = imc.Height

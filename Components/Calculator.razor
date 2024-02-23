@@ -7,9 +7,13 @@
 <div>
     <h1>Cálculo de IMC</h1>
 </div>
-<EditForm Model="@_model" OnValidSubmit="@OnValidSubmitAsync">
+<EditForm Model="@_model" OnValidSubmit="@OnValidSubmitAsync" OnInvalidSubmit="@OnInvalidSubmitAsync">
     <DataAnnotationsValidator></DataAnnotationsValidator>
     <ValidationSummary></ValidationSummary>
+    @if (_message != string.Empty)
+    {
+        <p>@_message</p>
+    }
     <div class="mb" >
         <InputNumber class="form-input" id="Altura" placeholder="Altura" step="0.01" @bind-Value="_model.Height" />
 @*             <span class="form-input-invalid">
@@ -62,14 +66,21 @@
 @code {
     private ImcModel _model = new();
     private Dialog _dialog = null!;
+    private string _message = string.Empty;
 
     private async Task OnValidSubmitAsync()
     {
+        _message = string.Empty;
         await ShowModalAsync();
         //var _person = new PersonModel { Height = _model.Height, Weight = _model.Weight, Sex = _model.Sex, IsElderly = person.IsElderly };
         //var imcResultRepository = new LocalStorageRepository(LocalStorage);
         //imcResultRepository.Create(_person);
         //var history = imcResultRepository.Get();
+    }
+
+    private async Task OnInvalidSubmitAsync()
+    {
+        _message = "Dados invalidos";
     }
 
     private async Task ShowModalAsync() => await _dialog.ShowModalAsync();
