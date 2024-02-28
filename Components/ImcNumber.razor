@@ -1,0 +1,21 @@
+﻿@if(Status == EStatus.Normal)
+{
+    <h1 class="success">@Value</h1>
+}
+else if (Status == EStatus.Obesidade || Status == EStatus.Magro)
+{
+    <h1 class="warning">@Value</h1>
+}
+else
+{
+    <h1 class="danger">@Value</h1>
+}
+
+@code {
+    [Parameter]
+    [EditorRequired]
+    public decimal Value { get; set; }
+    [Parameter]
+    [EditorRequired]
+    public EStatus Status { get; set; }
+}

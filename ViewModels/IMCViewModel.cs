@@ -21,7 +21,7 @@ namespace Imc.ViewModels
                 return Registered.ToString("dd/MM/yyyy");
             }
         }
-        public double? Value { get; set; }
+        public decimal Value { get; set; }
         public double? Height { get; set; }
         public double? Weight { get; set; }
         public EStatus Status { get; set; }
