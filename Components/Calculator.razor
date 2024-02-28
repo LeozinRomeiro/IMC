@@ -37,7 +37,7 @@
     </div> *@
     <div class="flex flex-center">
         <button class="btn btn-filled btn-auto mb" type="submit">Calcular meu IMC</button>
-        <a class="btn btn-link" href="#about">
+        <a class="btn btn-link" href="#slide-about">
             Entenda o cálculo
         </a>
     </div>
@@ -72,10 +72,6 @@
     {
         _message = string.Empty;
         await ShowModalAsync();
-        //var _person = new PersonModel { Height = _model.Height, Weight = _model.Weight, Sex = _model.Sex, IsElderly = person.IsElderly };
-        //var imcResultRepository = new LocalStorageRepository(LocalStorage);
-        //imcResultRepository.Create(_person);
-        //var history = imcResultRepository.Get();
     }
 
     private void OnInvalidSubmitAsync()
