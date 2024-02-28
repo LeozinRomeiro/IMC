@@ -58,9 +58,9 @@
     left: 0px;
     top: 0px;
     font-size: 100%;
-    background: #F6F6F6;
+    background: #ff946c;
     border-radius: 25px;
-    border: 1px #E8E8E8 solid;
+    border: 2px #FF4500 solid;
     text-indent: 5%;
 }
 
@@ -69,14 +69,14 @@
     display: block; /* Garante que os elementos ocupem a largura total disponível */
 }
 
-.search::placeholder {
-    padding: 2%;
-    left: 16px;
-    top: 16px;
-    color: #BDBDBD;
-    font-weight: 500;
-    word-wrap: break-word;
-}
+    .search::placeholder {
+        padding: 2%;
+        left: 16px;
+        top: 16px;
+        color: white;
+        font-weight: 500;
+        word-wrap: break-word;
+    }
 
 .search input {
     padding-left: 10px;
