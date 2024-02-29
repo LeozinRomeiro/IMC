@@ -1,0 +1,9 @@
+﻿.content {
+    display: flex;
+    flex-direction: column; /* Para alinhar verticalmente */
+    justify-content: center; /* Para alinhar horizontalmente */
+    text-align: left;
+    margin: 3%;
+    color: darkblue;
+    max-width: 500px; 
+}
