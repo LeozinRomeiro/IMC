@@ -1,4 +1,9 @@
-﻿dialog {
+﻿.result-dialog {
+    margin: auto;
+    padding: 1em;
+}
+
+dialog {
     border: none;
     background-color: transparent;
     width: 90%;

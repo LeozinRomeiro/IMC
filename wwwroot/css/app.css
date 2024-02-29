@@ -90,10 +90,10 @@ body {
     cursor: pointer;
     width: 320px;
     min-width: 320px;
-    display: block;
+    /*display: block;*/
     padding: 16px;
     font-weight: bold;
-    color : white;
+    color: white;
 }
 
 .btn-filled {
