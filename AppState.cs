@@ -9,11 +9,11 @@ namespace Imc
     {
         public static List<ImcModel> History { get; set; } = new();
         public static List<IMCViewModel> ViewHistory { get; set; } = new();
-        public static event EventHandler<EventArgs> OnChanged;
+        public static event EventHandler<EventArgs>? OnChanged;
 
-        public static async Task NotifyChanges(object? sender, EventArgs args)
+        public static void NotifyChanges(object? sender, EventArgs args)
         {
-            OnChanged.Invoke(sender, args);
+            OnChanged?.Invoke(sender, args);
             UpdateView();
         }
 
