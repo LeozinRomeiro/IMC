@@ -1,0 +1,27 @@
+<div class="content">
+
+	<h2>Como calcular o IMC</h2>
+
+	<p>O cálculo do IMC é feito usando a seguinte fórmula: <strong>peso (kg) ÷ (altura x altura) (m)</strong>.</p>
+
+	<h2>Qual o IMC normal?</h2>
+
+	<p>O IMC é considerado normal quando o valor está entre 18,5 e 24,9 kg/m².</p>
+
+	<TableImc></TableImc>
+
+	<p>
+		De acordo com o resultado de IMC também é possível prever o risco que cada pessoa tem de desenvolver doenças crônicas. Isto porque quanto maior é o valor do IMC, maior é a quantidade de gordura acumulada no corpo e maior o risco de doenças como pressão alta, diabetes e problemas cardíacos.
+	</p>
+
+</div>
+<div class="flex flex-center">
+	<a class="btn btn-link" href="#slide-calcule">
+		Calcular IMC
+	</a>
+</div>
+
+@code {
+	[Parameter]
+	public EStatus Status { get; set; }
+}

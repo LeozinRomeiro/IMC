@@ -1,0 +1,33 @@
+<MudSimpleTable Class="content-table" Style="overflow-x: auto;">
+    <thead>
+        <tr>
+            @foreach (var h in headings)
+            {
+                <th><strong>@h</strong></th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var row in rows)
+        {
+            <tr>
+                @foreach (var x in row.Split("&"))
+                {
+                    <td>@x</td>
+                }
+            </tr>
+        }
+    </tbody>
+</MudSimpleTable>
+
+@code {
+    string[] headings = { "IMC (kg/m²)", "Classificação" };
+    string[] rows = {
+        @"Menor que 18,5 & Baixo peso",
+        @"De 18,5 a 24,9 & Peso normal",
+        @"De 25 a 29,9 & Sobrepeso",
+        @"De 30 a 34,9 & Obesidade grau I",
+        @"De 35 a 39.9 & Obesidade grau II",
+        @"Igual ou maior que 40 & Obesidade grau III",
+    };
+}

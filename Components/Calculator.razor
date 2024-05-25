@@ -9,19 +9,24 @@
 </div>
 <EditForm Model="@_model" OnValidSubmit="@OnValidSubmitAsync" OnInvalidSubmit="@OnInvalidSubmitAsync">
     <DataAnnotationsValidator></DataAnnotationsValidator>
-    <ValidationSummary></ValidationSummary>
     @if (_message != string.Empty)
     {
         <p>@_message</p>
     }
     <div class="mb" >
-        <InputNumber class="form-input" id="Altura" placeholder="Altura" step="0.01" @bind-Value="_model.Height" />
-@*             <span class="form-input-invalid">
+        <InputNumber class="form-input" id="Altura" placeholder="Altura" step="0.01" @bind-Value="_model.Height" @oninput="FormatHeight" />
+        <span class="form-input-invalid">
+            <ValidationMessage For="@(() => _model.Height)" />
+        </span>
+        @*             <span class="form-input-invalid">
             <ValidationMessage For="@(() => _mode.Height)"/>
         </span>  *@   
     </div>
     <div class ="mb">
         <InputNumber class="form-input" id="Peso" @bind-Value="_model.Weight" placeholder="Peso" />
+        <span class="form-input-invalid">
+            <ValidationMessage For="@(() => _model.Weight)" />
+        </span>
     </div>
 @*         <div>
         <select class="input-text" @bind="_model.Sex">
@@ -37,7 +42,7 @@
     </div> *@
     <div class="flex flex-center">
         <button class="btn btn-filled btn-auto mb" type="submit">Calcular meu IMC</button>
-        <a class="btn btn-link" href="#about">
+        <a class="btn btn-link" href="#slide-about">
             Entenda o cálculo
         </a>
     </div>
@@ -72,10 +77,6 @@
     {
         _message = string.Empty;
         await ShowModalAsync();
-        //var _person = new PersonModel { Height = _model.Height, Weight = _model.Weight, Sex = _model.Sex, IsElderly = person.IsElderly };
-        //var imcResultRepository = new LocalStorageRepository(LocalStorage);
-        //imcResultRepository.Create(_person);
-        //var history = imcResultRepository.Get();
     }
 
     private void OnInvalidSubmitAsync()
@@ -97,4 +98,16 @@
     }
 
     //public EventCallback<PersonData> Calculation { get; set; }
+
+    private void FormatHeight(ChangeEventArgs e)
+    {
+        if (double.TryParse(e.Value.ToString(), out double value))
+        {
+            if (value > 100)
+            {
+                value = value / 100;
+            }
+            _model.Height = value;
+        }
+    }
 }
