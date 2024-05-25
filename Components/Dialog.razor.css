@@ -1,4 +1,9 @@
-﻿dialog {
+﻿.result-dialog {
+    margin: auto;
+    padding: 1em;
+}
+
+dialog {
     border: none;
     background-color: transparent;
     width: 90%;
@@ -7,7 +12,7 @@
 
 .dialog-content {
     border-radius: 16px;
-    width: 90%;
+    /*width: 90%;*/
     height: 320px;
     background-color: #FFFFFF;
     margin: auto;
@@ -15,9 +20,9 @@
     padding: 60px 16px 16px 16px;
 }
 
-    .dialog-content p {
-        font-size: 18px;
-    }
+.dialog-content p {
+    font-size: 18px;
+}
 
 .dialog-buttons {
     width: 100%;
