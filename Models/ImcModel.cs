@@ -32,5 +32,10 @@ namespace Imc.Models
                     return EStatus.Sobrepeso;
             } 
         }
+        //public string HeightString
+        //{
+        //    get => Height?.ToString("0.00") ?? string.Empty;
+        //    set => Height = double.TryParse(value, out var result) ? result : null;
+        //}
     }
 }
